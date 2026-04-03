@@ -1,32 +1,69 @@
 /* ============================================================
-   LIFE LINE GLOVES — MAIN JS
+   LIFE LINE GLOVES — MAIN JS (FIXED)
    ============================================================ */
 
 (function () {
   'use strict';
 
-  /* ── SCROLL: header + reveal ── */
-  const header = document.getElementById('site-header');
-  const revealEls = document.querySelectorAll('.reveal');
+  /* ── REVEAL SYSTEM ──
+     Elements above the fold become visible immediately.
+     Elements below fold animate in on scroll.
+  ─────────────────────────────────────────────────────────── */
+  function initReveal() {
+    const revealEls = document.querySelectorAll('.reveal');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-  revealEls.forEach((el) => observer.observe(el));
-
-  window.addEventListener('scroll', () => {
-    if (header) {
-      header.classList.toggle('scrolled', window.scrollY > 60);
+    function checkEl(el) {
+      const rect = el.getBoundingClientRect();
+      const windowH = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < windowH * 0.94) {
+        el.classList.add('visible');
+        return true;
+      }
+      return false;
     }
-  }, { passive: true });
+
+    // Immediately make all currently-visible elements show
+    revealEls.forEach(checkEl);
+
+    // IntersectionObserver for below-fold
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealEls.forEach((el) => {
+      if (!el.classList.contains('visible')) io.observe(el);
+    });
+
+    // Scroll fallback
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          revealEls.forEach((el) => {
+            if (!el.classList.contains('visible')) checkEl(el);
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  /* ── HEADER SCROLL STATE ── */
+  const header = document.getElementById('site-header');
+  function updateHeader() {
+    if (header) header.classList.toggle('scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
 
   /* ── HAMBURGER / MOBILE NAV ── */
   const hamburger = document.getElementById('hamburger');
@@ -37,7 +74,6 @@
       hamburger.classList.toggle('active', open);
       document.body.style.overflow = open ? 'hidden' : '';
     });
-    // close on link click
     nav.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
         nav.classList.remove('open');
@@ -47,7 +83,7 @@
     });
   }
 
-  /* ── PRODUCT TAB FILTER (products page) ── */
+  /* ── PRODUCT TAB FILTER ── */
   const tabBtns = document.querySelectorAll('.tab-btn');
   tabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -56,38 +92,44 @@
       const target = btn.dataset.target;
       const section = document.getElementById(target);
       if (section) {
-        const offset = document.querySelector('.product-tabs-bar')?.offsetHeight || 0;
+        const tabBar = document.querySelector('.product-tabs-bar');
+        const offset = tabBar ? tabBar.offsetHeight : 0;
         const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-        const top = section.getBoundingClientRect().top + window.scrollY - navH - offset;
+        const top = section.getBoundingClientRect().top + window.scrollY - navH - offset - 8;
         window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
 
   /* ── FLOATING WHATSAPP BUTTON ── */
-  const wa = document.createElement('a');
-  wa.href = 'https://wa.me/923222229776?text=Hello%20Life%20Line%20Gloves%2C%20I%20would%20like%20to%20inquire%20about%20your%20PPE%20products.';
-  wa.target = '_blank';
-  wa.rel = 'noopener noreferrer';
-  wa.className = 'wa-float';
-  wa.setAttribute('aria-label', 'Chat on WhatsApp');
-  wa.innerHTML = '💬';
-  document.body.appendChild(wa);
+  if (!document.querySelector('.wa-float')) {
+    const wa = document.createElement('a');
+    wa.href = 'https://wa.me/923222229776?text=Hello%20Life%20Line%20Gloves%2C%20I%20would%20like%20to%20inquire%20about%20your%20PPE%20products.';
+    wa.target = '_blank';
+    wa.rel = 'noopener noreferrer';
+    wa.className = 'wa-float';
+    wa.setAttribute('aria-label', 'Chat on WhatsApp');
+    wa.innerHTML = '&#128172;';
+    document.body.appendChild(wa);
+  }
 
   /* ── SMOOTH ANCHOR SCROLLING ── */
   document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
-      const url = new URL(anchor.href, window.location.href);
-      if (url.pathname !== window.location.pathname) return;
-      const hash = url.hash;
-      if (!hash) return;
-      const target = document.querySelector(hash);
-      if (!target) return;
-      e.preventDefault();
-      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-      const extraOffset = document.querySelector('.product-tabs-bar') ? 60 : 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH - extraOffset - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
+      try {
+        const url = new URL(anchor.href, window.location.href);
+        if (url.pathname.replace(/\/$/, '') !== window.location.pathname.replace(/\/$/, '')) return;
+        const hash = url.hash;
+        if (!hash || hash === '#') return;
+        const target = document.querySelector(hash);
+        if (!target) return;
+        e.preventDefault();
+        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+        const tabBar = document.querySelector('.product-tabs-bar');
+        const extraOffset = tabBar ? tabBar.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - navH - extraOffset - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+      } catch (_) {}
     });
   });
 
@@ -110,13 +152,14 @@
 
   /* ── COUNTER ANIMATION ── */
   function animateCount(el, target, duration) {
-    let start = 0;
+    const original = el.textContent.trim();
+    const suffix = original.replace(/[0-9]/g, '');
+    let startTs = null;
     const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const val = Math.floor(progress * target);
-      const suffix = el.dataset.suffix || '';
-      el.textContent = val + suffix;
+      if (!startTs) startTs = timestamp;
+      const progress = Math.min((timestamp - startTs) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -128,13 +171,19 @@
       if (e.isIntersecting) {
         const raw = e.target.textContent.replace(/[^0-9]/g, '');
         const num = parseInt(raw, 10);
-        if (!isNaN(num) && num > 0) {
-          animateCount(e.target, num, 1400);
-        }
+        if (!isNaN(num) && num > 0) animateCount(e.target, num, 1600);
         counterObserver.unobserve(e.target);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
   statEls.forEach((el) => counterObserver.observe(el));
+
+  /* ── INIT on DOM ready AND on window load ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+  window.addEventListener('load', initReveal);
 
 })();

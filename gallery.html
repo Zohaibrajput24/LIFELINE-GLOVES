@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery – Products & Facility | Life Line Gloves</title>
+  <meta name="description" content="Browse the Life Line Gloves product and facility gallery. Leather safety gloves, workwear, protective footwear and manufacturing photos." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <svg class="logo-icon-svg" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" fill="var(--accent)"/><path d="M10 22V13a4 4 0 018 0v9M14 13V9a4 4 0 018 0v13" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <span class="logo-text">Life Line <strong>Gloves</strong></span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="capabilities.html" class="nav-link">Capabilities</a>
+        <a href="industries.html" class="nav-link">Industries</a>
+        <a href="gallery.html" class="nav-link active">Gallery</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="contact.html" class="btn btn-accent nav-cta">Request Quote</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero page-hero-short">
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <p class="page-breadcrumb reveal"><a href="index.html">Home</a> / <span>Gallery</span></p>
+      <h1 class="reveal delay-1">Our <span class="accent-text">Gallery</span></h1>
+      <p class="reveal delay-2">Browse our product range and manufacturing facility photos.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section class="section">
+    <div class="container">
+
+      <!-- FILTER BUTTONS -->
+      <div class="gallery-filters reveal">
+        <button class="gal-filter-btn active" data-filter="all">All</button>
+        <button class="gal-filter-btn" data-filter="gloves">Safety Gloves</button>
+        <button class="gal-filter-btn" data-filter="workwear">Workwear</button>
+        <button class="gal-filter-btn" data-filter="footwear">Footwear</button>
+        <button class="gal-filter-btn" data-filter="facility">Facility</button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           GALLERY GRID
+           To add your own images:
+             1. Put your image files in an "images/" folder
+             2. Replace src="YOUR-IMAGE.jpg" with your file path
+             3. Update data-category (gloves / workwear / footwear / facility)
+             4. Update data-caption with the product name
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="gallery-full-grid" id="gallery-grid">
+
+        <!-- GLOVES -->
+        <div class="gal-item reveal delay-1" data-category="gloves" data-caption="Leather Safety Gloves">
+          <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=700&q=80" alt="Leather Safety Gloves" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Leather Safety Gloves</span>
+          </div>
+        </div>
+
+        <div class="gal-item wide reveal delay-2" data-category="gloves" data-caption="Driver Gloves – Open Back Design">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Driver Gloves" loading="lazy" style="height:300px;object-fit:cover;width:100%;border-radius:var(--radius)" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Driver Gloves – Open Back Design</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-3" data-category="gloves" data-caption="Mechanic Gloves">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=80" alt="Mechanic Gloves" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Mechanic Gloves</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-1" data-category="gloves" data-caption="Cut-Resistant Gloves – ANSI Level A4">
+          <img src="https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=700&q=80" alt="Cut-Resistant Gloves" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Cut-Resistant Gloves – ANSI Level A4</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-2" data-category="gloves" data-caption="Welding Gloves – Long Cuff">
+          <img src="https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=700&q=80" alt="Welding Gloves" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Welding Gloves – Long Cuff</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-3" data-category="gloves" data-caption="Winter Thermal Gloves">
+          <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=700&q=80" alt="Winter Thermal Gloves" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Winter Thermal Gloves</span>
+          </div>
+        </div>
+
+        <!-- WORKWEAR -->
+        <div class="gal-item wide reveal delay-1" data-category="workwear" data-caption="Industrial Coveralls – Full-Body Protection">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80" alt="Industrial Coveralls" loading="lazy" style="height:300px;object-fit:cover;width:100%;border-radius:var(--radius)" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Industrial Coveralls – Full-Body Protection</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-2" data-category="workwear" data-caption="Hi-Vis Safety Vest – Class 2">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Hi-Vis Safety Vest" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Hi-Vis Safety Vest – Class 2</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-3" data-category="workwear" data-caption="Flame-Resistant FR Clothing">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&q=80" alt="FR Clothing" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Flame-Resistant FR Clothing</span>
+          </div>
+        </div>
+
+        <!-- FOOTWEAR -->
+        <div class="gal-item reveal delay-1" data-category="footwear" data-caption="Safety Shoes – Steel Toe Cap">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80" alt="Safety Shoes" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Safety Shoes – Steel Toe Cap</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-2" data-category="footwear" data-caption="Industrial Safety Boots – High Ankle">
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=700&q=80" alt="Industrial Safety Boots" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Industrial Safety Boots – High Ankle</span>
+          </div>
+        </div>
+
+        <!-- FACILITY -->
+        <div class="gal-item wide reveal delay-3" data-category="facility" data-caption="Manufacturing Facility – Karachi, Pakistan">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=900&q=80" alt="Manufacturing Facility" loading="lazy" style="height:300px;object-fit:cover;width:100%;border-radius:var(--radius)" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Manufacturing Facility – Karachi, Pakistan</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-1" data-category="facility" data-caption="Quality Control Process">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80" alt="Quality Control" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Quality Control Process</span>
+          </div>
+        </div>
+
+        <div class="gal-item reveal delay-2" data-category="facility" data-caption="Export-Ready Packaging">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80" alt="Export Packaging" loading="lazy" />
+          <div class="gal-overlay">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Export-Ready Packaging</span>
+          </div>
+        </div>
+
+      </div><!-- /gallery-full-grid -->
+
+      <!-- INSTRUCTIONS CARD FOR WEBSITE OWNER -->
+      <div class="gallery-how-to reveal">
+        <div class="how-to-inner">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <div>
+            <h4>How to Add Your Own Images</h4>
+            <p>Create an <code>images/</code> folder in your website directory. Then in <code>gallery.html</code>, find any <code>&lt;img src="..."&gt;</code> and replace the URL with your file path (e.g. <code>images/my-product.jpg</code>). Update <code>data-caption</code> and <code>data-category</code> accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lb-close" id="lb-close" aria-label="Close">&times;</button>
+    <button class="lb-prev" id="lb-prev" aria-label="Previous">&#8592;</button>
+    <button class="lb-next" id="lb-next" aria-label="Next">&#8594;</button>
+    <div class="lb-content">
+      <img src="" alt="" id="lb-img" />
+      <p class="lb-caption" id="lb-caption"></p>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container cta-inner">
+      <div class="reveal">
+        <h2>Interested in Our Products?</h2>
+        <p>Request samples or a quote today. We respond within 24 hours.</p>
+      </div>
+      <div class="cta-actions reveal delay-2">
+        <a href="contact.html" class="btn btn-accent btn-lg">Request a Quote</a>
+        <a href="products.html" class="btn btn-outline-white btn-lg">View Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo logo-light">
+          <svg class="logo-icon-svg" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="6" fill="var(--accent)"/><path d="M10 22V13a4 4 0 018 0v9M14 13V9a4 4 0 018 0v13" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span class="logo-text">Life Line <strong>Gloves</strong></span>
+        </a>
+        <p>Pakistan's trusted manufacturer and exporter of leather safety gloves, industrial workwear &amp; protective footwear.</p>
+        <div class="social-links">
+          <a href="mailto:info@lifeline-gloves.com" class="social-link" aria-label="Email">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M3 5h14l-7 8-7-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 5v10h14V5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://wa.me/923222229776" class="social-link" aria-label="WhatsApp" target="_blank">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 018 8 8 8 0 01-8 8 7.9 7.9 0 01-4-1.1L2 18l1.1-4A7.9 7.9 0 012 10a8 8 0 018-8z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="capabilities.html">Capabilities</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Products</h5>
+        <ul>
+          <li><a href="products.html#gloves">Safety Gloves</a></li>
+          <li><a href="products.html#workwear">Industrial Workwear</a></li>
+          <li><a href="products.html#footwear">Protective Footwear</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact Us</h5>
+        <p><svg viewBox="0 0 16 16" fill="none"><path d="M8 2C5.8 2 4 3.8 4 6c0 3.5 4 8 4 8s4-4.5 4-8c0-2.2-1.8-4-4-4z" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6" r="1.5" fill="currentColor"/></svg> Plot # A332, Sector 31/D, P &amp; T Society, Korangi, Karachi</p>
+        <p><svg viewBox="0 0 16 16" fill="none"><path d="M3 3h4l1.5 3.5-2 1.5a9 9 0 004 4l1.5-2L15 11v4c-7 0-12-5-12-12z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg> <a href="tel:+923222229776">+92 322 2229776</a></p>
+        <p><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12l-6 6-6-6z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M2 4v8h12V4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg> <a href="mailto:info@lifeline-gloves.com">info@lifeline-gloves.com</a></p>
+        <a href="https://wa.me/923222229776" class="btn btn-whatsapp" target="_blank">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 018 8 8 8 0 01-8 8 7.9 7.9 0 01-4-1.1L2 18l1.1-4A7.9 7.9 0 012 10a8 8 0 018-8z" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 9c.3.8 1 1.8 1.8 2.5.8.8 1.7 1.4 2.5 1.5l.8-1 1.4.7c-.3 1-1.2 1.3-2 1.3C9.5 14 6 10.5 6 8c0-.8.3-1.7 1.3-2l.7 1.4L7.5 9z" fill="currentColor"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2025 Life Line Gloves. All Rights Reserved. | Pakistan PPE Manufacturer &amp; Exporter</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>
