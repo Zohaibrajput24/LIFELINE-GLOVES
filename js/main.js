@@ -1,140 +1,106 @@
-/* ============================================================
-   LIFE LINE GLOVES — MAIN JS
-   ============================================================ */
+/* Life Line Gloves — Main JS */
+(function(){
+'use strict';
 
-(function () {
-  'use strict';
-
-  /* ── SCROLL: header + reveal ── */
-  const header = document.getElementById('site-header');
-  const revealEls = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-  revealEls.forEach((el) => observer.observe(el));
-
-  window.addEventListener('scroll', () => {
-    if (header) {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    }
-  }, { passive: true });
-
-  /* ── HAMBURGER / MOBILE NAV ── */
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('main-nav');
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      hamburger.classList.toggle('active', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+/* ══ SCROLL REVEAL ══
+   Adds .is-visible to .sr / .sr-left / .sr-right / .sr-scale
+   CSS fallback shows everything after 2.4s anyway.          */
+function initReveal(){
+  var sel = '.sr,.sr-left,.sr-right,.sr-scale';
+  var els = document.querySelectorAll(sel);
+  if(!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
     });
-    // close on link click
-    nav.querySelectorAll('.nav-link').forEach((link) => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('open');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-  }
+  },{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(function(el){ io.observe(el); });
+}
 
-  /* ── PRODUCT TAB FILTER (products page) ── */
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  tabBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      const target = btn.dataset.target;
-      const section = document.getElementById(target);
-      if (section) {
-        const offset = document.querySelector('.product-tabs-bar')?.offsetHeight || 0;
-        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-        const top = section.getBoundingClientRect().top + window.scrollY - navH - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
+/* ══ COUNTER ANIMATION ══ */
+function runCount(el){
+  var target = parseInt(el.dataset.target,10);
+  if(!target||el.dataset.counted) return;
+  el.dataset.counted = '1';
+  var dur=1600, start=null;
+  (function step(ts){
+    if(!start) start=ts;
+    var p=Math.min((ts-start)/dur,1), e=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(e*target);
+    if(p<1) requestAnimationFrame(step); else el.textContent=target;
+  })(performance.now());
+}
+function initCounters(){
+  var els = document.querySelectorAll('.hsb-num,.js-count,.wn-n,.sb-num,.stat-big');
+  if(!els.length) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ runCount(e.target); io.unobserve(e.target); } });
+  },{threshold:0.6});
+  els.forEach(function(el){ io.observe(el); });
+}
+
+/* ══ HEADER ══ */
+var hdr=document.getElementById('hdr');
+function upHdr(){ if(hdr) hdr.classList.toggle('scrolled',window.scrollY>50); }
+window.addEventListener('scroll',upHdr,{passive:true});
+upHdr();
+
+/* ══ MOBILE NAV ══ */
+var hbg=document.getElementById('hbg'), nav=document.getElementById('nav');
+if(hbg&&nav){
+  hbg.addEventListener('click',function(){
+    var o=nav.classList.toggle('open');
+    hbg.classList.toggle('open',o);
+    document.body.style.overflow=o?'hidden':'';
   });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ nav.classList.remove('open'); hbg.classList.remove('open'); document.body.style.overflow=''; });
+  });
+}
 
-  /* ── FLOATING WHATSAPP BUTTON ── */
-  const wa = document.createElement('a');
-  wa.href = 'https://wa.me/923222229776?text=Hello%20Life%20Line%20Gloves%2C%20I%20would%20like%20to%20inquire%20about%20your%20PPE%20products.';
-  wa.target = '_blank';
-  wa.rel = 'noopener noreferrer';
-  wa.className = 'wa-float';
-  wa.setAttribute('aria-label', 'Chat on WhatsApp');
-  wa.innerHTML = '💬';
-  document.body.appendChild(wa);
+/* ══ PRODUCT TABS ══ */
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var sec=document.getElementById(btn.dataset.t);
+    if(sec){
+      var nH=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))||72;
+      var tH=(document.querySelector('.tab-bar')||{offsetHeight:0}).offsetHeight;
+      window.scrollTo({top:sec.getBoundingClientRect().top+scrollY-nH-tH-6,behavior:'smooth'});
+    }
+  });
+});
 
-  /* ── SMOOTH ANCHOR SCROLLING ── */
-  document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-      const url = new URL(anchor.href, window.location.href);
-      if (url.pathname !== window.location.pathname) return;
-      const hash = url.hash;
-      if (!hash) return;
-      const target = document.querySelector(hash);
-      if (!target) return;
+/* ══ SMOOTH HASH SCROLL ══ */
+document.querySelectorAll('a[href*="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    try{
+      var u=new URL(a.href,location.href);
+      if(u.pathname.replace(/\/$/,'')!==location.pathname.replace(/\/$/,'')) return;
+      if(!u.hash||u.hash==='#') return;
+      var t=document.querySelector(u.hash); if(!t) return;
       e.preventDefault();
-      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-      const extraOffset = document.querySelector('.product-tabs-bar') ? 60 : 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH - extraOffset - 16;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
+      var nH=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))||72;
+      window.scrollTo({top:t.getBoundingClientRect().top+scrollY-nH-12,behavior:'smooth'});
+    }catch(_){}
   });
+});
 
-  /* ── PREFILL CONTACT FORM FROM URL PARAMS ── */
-  const params = new URLSearchParams(window.location.search);
-  const productParam = params.get('product');
-  const typeParam = params.get('type');
-  if (productParam) {
-    const sel = document.getElementById('product');
-    if (sel) {
-      for (const opt of sel.options) {
-        if (opt.value === productParam) { opt.selected = true; break; }
-      }
-    }
-  }
-  if (typeParam === 'sample') {
-    const sampleTab = document.querySelector('.form-tab[data-form="sample"]');
-    if (sampleTab) sampleTab.click();
-  }
+/* ══ WHATSAPP FLOAT ══ */
+if(!document.querySelector('.wa-float')){
+  var wa=document.createElement('a');
+  wa.href='https://wa.me/923222229776?text=Hello%20Life%20Line%20Gloves';
+  wa.target='_blank'; wa.rel='noopener noreferrer';
+  wa.className='wa-float'; wa.setAttribute('aria-label','WhatsApp');
+  wa.innerHTML='<svg viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0110 10 10 10 0 01-10 10 9.9 9.9 0 01-5-1.3L2 22l1.3-5A9.9 9.9 0 012 12 10 10 0 0112 2z" stroke="currentColor" stroke-width="2"/><path d="M9 11c.4 1 1.2 2.2 2.2 3.1 1 1 2.1 1.7 3.1 1.9l1-1.3 1.7.9c-.4 1.2-1.5 1.6-2.5 1.6C11.8 17.2 7 12.4 7 9.5c0-1 .4-2.1 1.6-2.5L9.5 8 9 11z" fill="currentColor"/></svg>';
+  document.body.appendChild(wa);
+}
 
-  /* ── COUNTER ANIMATION ── */
-  function animateCount(el, target, duration) {
-    let start = 0;
-    const step = (timestamp) => {
-      if (!start) start = timestamp;
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const val = Math.floor(progress * target);
-      const suffix = el.dataset.suffix || '';
-      el.textContent = val + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  const statEls = document.querySelectorAll('.stat-num, .about-stat-num');
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        const raw = e.target.textContent.replace(/[^0-9]/g, '');
-        const num = parseInt(raw, 10);
-        if (!isNaN(num) && num > 0) {
-          animateCount(e.target, num, 1400);
-        }
-        counterObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  statEls.forEach((el) => counterObserver.observe(el));
+/* ══ INIT ══ */
+function init(){ initReveal(); initCounters(); }
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+else init();
+window.addEventListener('load',init);
 
 })();
