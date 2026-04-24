@@ -131,10 +131,24 @@ p{color:var(--muted);font-size:clamp(.9rem,2vw,1rem)}
   border-bottom:1px solid rgba(255,255,255,.07);
 }
 .nav-wrap{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-.logo{display:flex;align-items:center;gap:10px;color:#fff;font-family:var(--fh);font-size:1.15rem;font-weight:700;letter-spacing:.2px;-webkit-tap-highlight-color:transparent;z-index:1001}
-.logo-icon{width:34px;height:34px;transition:transform .35s}
-.logo:hover .logo-icon{transform:rotate(8deg) scale(1.08)}
-.logo strong{color:var(--acc)}
+.logo{display:flex;align-items:center;-webkit-tap-highlight-color:transparent;z-index:1001;line-height:0}
+.logo-img{
+  border-radius:6px;
+  height:405px;
+  width:auto;
+  max-width:190px;
+  object-fit:contain;
+  display:block;
+  /* Remove black background from the jfif */
+  mix-blend-mode:normal;
+  filter:brightness(1.08) contrast(1.05);
+  transition:transform .3s ease, opacity .2s;
+}
+.logo:hover .logo-img{
+  border-radius:6px;transform:scale(1.04);opacity:.92}
+/* Larger in footer where background is dark */
+.site-footer .logo-img{
+  border-radius:6px;height:191px}
 
 /* Desktop nav */
 .main-nav{display:none;align-items:center;gap:2px}
