@@ -134,7 +134,7 @@ p{color:var(--muted);font-size:clamp(.9rem,2vw,1rem)}
 .logo{display:flex;align-items:center;-webkit-tap-highlight-color:transparent;z-index:1001;line-height:0}
 .logo-img{
   border-radius:6px;
-  height:405px;
+  height:50px;
   width:auto;
   max-width:190px;
   object-fit:contain;
@@ -148,7 +148,7 @@ p{color:var(--muted);font-size:clamp(.9rem,2vw,1rem)}
   border-radius:6px;transform:scale(1.04);opacity:.92}
 /* Larger in footer where background is dark */
 .site-footer .logo-img{
-  border-radius:6px;height:191px}
+  border-radius:6px;height:50px}
 
 /* Desktop nav */
 .main-nav{display:none;align-items:center;gap:2px}
